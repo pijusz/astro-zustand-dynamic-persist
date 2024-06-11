@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { create, createStore } from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type StoreType = "unknown" | "fruits" | "veggies" | "drinks";
@@ -25,7 +24,7 @@ const INITIAL_STATE: Omit<Store, "actions" | "createDate" | "modifyDate"> = {
 	data: {},
 };
 
-export const useDynamicStore = (storeName: StoreType) =>
+const createStore = (storeName: StoreType) =>
 	create<Store>()(
 		persist(
 			(set, get) => ({
@@ -68,7 +67,19 @@ export const useDynamicStore = (storeName: StoreType) =>
 		),
 	);
 
-// TODO!: Why is this not working?
+export type ZustandStoreType = ReturnType<typeof createStore>;
+
+export const useDynamicStore = (storeName: StoreType): ZustandStoreType => {
+	if (!window?.stores) {
+		window.stores = new Map();
+	} else if (window.stores.has(storeName)) {
+		return window.stores.get(storeName);
+	}
+	const newStore = createStore(storeName);
+	window.stores.set(storeName, newStore);
+	return newStore;
+};
+
 export const useStoreActions = (storeName: StoreType) => {
 	const store = useDynamicStore(storeName);
 	return store((state) => state.actions);
