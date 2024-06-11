@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { create, createStore } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type StoreType = "unknown" | "fruits" | "veggies";
+export type StoreType = "unknown" | "fruits" | "veggies" | "drinks";
 
 type CustomData = Record<string, string | number | boolean | undefined>;
 

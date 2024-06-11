@@ -6,6 +6,7 @@ export const DynamicFormFruits = () => {
 	const actions = useStore((state) => state.actions);
 	const name = useStore((state) => state.item_name);
 	const data = useStore((state) => state.data);
+	const dates = actions.getDates();
 
 	return (
 		<div>
@@ -33,6 +34,8 @@ export const DynamicFormFruits = () => {
 
 			<div>Current fruit "{name}"</div>
 			<div>Current fruit Data {JSON.stringify(data)}</div>
+			<div>Static Created: {dates[0].toISOString()}</div>
+			<div>Static Updated: {dates[1].toISOString()}</div>
 		</div>
 	);
 };

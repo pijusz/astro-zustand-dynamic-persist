@@ -1,5 +1,6 @@
 ---
 import { DynamicFormFruits } from "../components/DynamicFormFruits";
+import { DynamicFormMisc } from "../components/DynamicFormMisc";
 import { DynamicFormVeggies } from "../components/DynamicFormVeggies";
 ---
 
@@ -12,14 +13,17 @@ import { DynamicFormVeggies } from "../components/DynamicFormVeggies";
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
-		<h2>
+		<h1>
 			Dynamic Store Form Fruits:
-		</h2>
+		</h1>
 		<DynamicFormFruits client:only="react" />
-		<h2>
+		<h1>
 			Dynamic Store Form Veggies:
-		</h2>
+		</h1>
 		<DynamicFormVeggies client:only="react" />
+		<br>
+		<br>
+		<h1>Store set from Props Data at build time</h1>
+		<DynamicFormMisc client:only="react" storeName="drinks" />
 	</body>
 </html>
